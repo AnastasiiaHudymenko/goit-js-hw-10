@@ -17,7 +17,7 @@ refs.inputUser.addEventListener(
 
 function onInputUser(e) {
   const userSearch = e.target.value.trim();
-  if (userSearch === '') {
+  if (!userSearch) {
     clearInput();
     return;
   }
