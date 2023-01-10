@@ -15,13 +15,20 @@ refs.inputUser.addEventListener(
   debounce(onInputUser, DEBOUNCE_DELAY, { trailing: true })
 );
 
-function onInputUser(e) {
+async function onInputUser(e) {
   const userSearch = e.target.value.trim();
   if (!userSearch) {
     clearInput();
     return;
   }
-  fetchCountries(userSearch).then(getResponsiv).catch(getError);
+  try {
+    const countries = await fetchCountries(userSearch);
+    getResponsiv(countries);
+    // .then(getResponsiv)
+    // .catch(getError);
+  } catch (error) {
+    getError(error);
+  }
 }
 
 function getError(error) {
